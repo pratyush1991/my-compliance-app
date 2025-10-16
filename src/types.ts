@@ -1,10 +1,11 @@
+export const Geography = {
+  US: 'United States',
+  LATAM: 'Latin America',
+  EMEA: 'EMEA (Europe, Middle East, and Africa)',
+  JAPAC: 'JAPAC (Japan and Asia-Pacific)',
+} as const;
 
-export enum Geography {
-  US = 'United States',
-  LATAM = 'Latin America',
-  EMEA = 'EMEA (Europe, Middle East, and Africa)',
-  JAPAC = 'JAPAC (Japan and Asia-Pacific)',
-}
+export type GeographyValue = (typeof Geography)[keyof typeof Geography];
 
 export interface Standard {
   id: string;
