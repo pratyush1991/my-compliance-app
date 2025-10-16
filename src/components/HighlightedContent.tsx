@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComplianceIssue } from '../types';
+import type { ComplianceIssue } from '../types';
 
 interface HighlightedContentProps {
     content: string;
