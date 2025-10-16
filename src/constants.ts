@@ -1,7 +1,7 @@
+import { Geography } from './types';
+import type { GeographyValue, Standard } from './types';
 
-import { Geography, Standard } from './types';
-
-export const GEOGRAPHY_STANDARDS_MAP: Record<Geography, Standard[]> = {
+export const GEOGRAPHY_STANDARDS_MAP: Record<GeographyValue, Standard[]> = {
   [Geography.US]: [
     { id: 'hipaa', name: 'HIPAA', description: 'Health Insurance Portability and Accountability Act' },
     { id: 'fda_21_cfr_part_11', name: 'FDA 21 CFR Part 11', description: 'FDA regulations on electronic records and signatures' },
