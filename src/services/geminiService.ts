@@ -51,10 +51,14 @@ export const assessContent = async (content: string, standardName: string): Prom
       }
 
       if (sentences.length > 1) {
-          mockReport.issues[1].nonCompliantText = sentences[1].trim();
+          if(mockReport.issues[1]) {
+            mockReport.issues[1].nonCompliantText = sentences[1].trim();
+          }
       } else if (content.length > 80) {
-          const secondChunkStart = Math.max(0, content.length - 40);
-          mockReport.issues[1].nonCompliantText = content.substring(secondChunkStart).trim();
+          if(mockReport.issues[1]) {
+            const secondChunkStart = Math.max(0, content.length - 40);
+            mockReport.issues[1].nonCompliantText = content.substring(secondChunkStart).trim();
+          }
       } else {
         // If there's only one issue, we can remove the second one.
         mockReport.issues.pop();
