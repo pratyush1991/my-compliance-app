@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useCallback, useRef } from 'react';
-import { Geography, Standard, ComplianceReport } from './types';
+import { Geography } from './types';
+import type { GeographyValue, Standard, ComplianceReport } from './types';
 import { GEOGRAPHY_STANDARDS_MAP } from './constants';
 import { assessContent } from './services/geminiService';
-import { DownloadIcon, FileTextIcon, JsonIcon, UploadIcon } from './components/Icons';
+import { FileTextIcon, JsonIcon, UploadIcon } from './components/Icons';
 import Spinner from './components/Spinner';
 import HighlightedContent from './components/HighlightedContent';
 
@@ -98,7 +99,7 @@ const ReportDisplay: React.FC<{ report: ComplianceReport, onExport: (format: 'tx
 };
 
 export default function App() {
-    const [geography, setGeography] = useState<Geography | ''>('');
+    const [geography, setGeography] = useState<GeographyValue | ''>('');
     const [standard, setStandard] = useState<Standard | null>(null);
     const [content, setContent] = useState('');
     const [report, setReport] = useState<ComplianceReport | null>(null);
@@ -198,7 +199,7 @@ export default function App() {
                                 id="geography"
                                 value={geography}
                                 onChange={(e) => {
-                                    setGeography(e.target.value as Geography);
+                                    setGeography(e.target.value as GeographyValue);
                                     setStandard(null); // Reset standard on geography change
                                 }}
                                 className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm rounded-md"
@@ -316,7 +317,7 @@ export default function App() {
                             <ReportDisplay report={report} onExport={handleExport} />
                         ) : (
                             <div className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col items-center justify-center text-center border-2 border-dashed border-slate-200">
-                                <svg className="w-16 h-16 text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                                <svg className="w-16 h-16 text-slate-300" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 <h2 className="mt-4 text-lg font-medium text-slate-600">Your Compliance Report Will Appear Here</h2>
