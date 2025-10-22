@@ -42,22 +42,35 @@ export const assessContent = async (content: string, standardName: string): Prom
     if (content.trim()) {
       const sentences = content.match(/[^.!?]+[.!?]+/g) || [];
       if (sentences.length > 0) {
-          mockReport.issues[0].nonCompliantText = sentences[0].trim();
+          const issue = mockReport.issues[0];
+          const sentence = sentences[0];
+          if (issue && sentence) {
+            issue.nonCompliantText = sentence.trim();
+          }
       } else if (content.length > 20) {
-          const firstChunkEnd = content.indexOf(' ', 20) !== -1 ? content.indexOf(' ', 20) : Math.min(content.length, 30);
-          mockReport.issues[0].nonCompliantText = content.substring(0, firstChunkEnd).trim();
+          const issue = mockReport.issues[0];
+          if (issue) {
+            const firstChunkEnd = content.indexOf(' ', 20) !== -1 ? content.indexOf(' ', 20) : Math.min(content.length, 30);
+            issue.nonCompliantText = content.substring(0, firstChunkEnd).trim();
+          }
       } else {
-         mockReport.issues[0].nonCompliantText = content.trim();
+         const issue = mockReport.issues[0];
+         if (issue) {
+            issue.nonCompliantText = content.trim();
+         }
       }
 
       if (sentences.length > 1) {
-          if(mockReport.issues[1]) {
-            mockReport.issues[1].nonCompliantText = sentences[1].trim();
+          const issue = mockReport.issues[1];
+          const sentence = sentences[1];
+          if (issue && sentence) {
+            issue.nonCompliantText = sentence.trim();
           }
       } else if (content.length > 80) {
-          if(mockReport.issues[1]) {
+          const issue = mockReport.issues[1];
+          if (issue) {
             const secondChunkStart = Math.max(0, content.length - 40);
-            mockReport.issues[1].nonCompliantText = content.substring(secondChunkStart).trim();
+            issue.nonCompliantText = content.substring(secondChunkStart).trim();
           }
       } else {
         // If there's only one issue, we can remove the second one.
